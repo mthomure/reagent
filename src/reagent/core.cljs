@@ -346,3 +346,11 @@
   ;; with future versions of React (and return nil).
   [c]
   (comp/component-path c))
+
+(defn register-component
+  "Creates an alias for a component.
+  (r/register-component :my-component my-component)
+  Can be used later as:
+  [:my-component]"
+  [name component]
+  (tmpl/register-component name component))

@@ -12,6 +12,8 @@
 
 (declare as-element)
 
+(def registered-components (atom {}))
+
 ;; From Weavejester's Hiccup, via pump:
 (def ^{:doc "Regular expression that parses a CSS-style id and class
              from a tag name."}
@@ -372,7 +374,8 @@
 
 (defn vec-to-elem [v]
   (assert (pos? (count v)) (hiccup-err v "Hiccup form should not be empty"))
-  (let [tag (nth v 0 nil)]
+  (let [tag (nth v 0 nil)
+        tag (or (@registered-components tag) tag)]
     (assert (valid-tag? tag) (hiccup-err v "Invalid Hiccup form"))
     (cond
       (keyword-identical? :<> tag)
@@ -483,3 +486,6 @@
                            (.push a (as-element v)))
                          a)
                        #js[comp jsprops] argv))))
+
+(defn register-component [name component]
+  (swap! registered-components assoc name component))
