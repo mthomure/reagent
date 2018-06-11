@@ -1,7 +1,9 @@
-(defproject reagent "0.8.1"
+(defproject mthomure/reagent "0.8.1-custom-components"
   :url "http://github.com/reagent-project/reagent"
   :license {:name "MIT"}
   :description "A simple ClojureScript interface to React"
+
+  :repositories [["clojars" {:sign-releases false}]]
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  ;; If :npm-deps enabled, these are used only for externs.
